@@ -2,7 +2,7 @@ Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
 
 SELECT `students`.`id` AS `id_studente`, `students`.`name` AS `name_studente`, `students`.`surname` AS `cognome_studente`
 FROM `students`
-JOIN`degrees` ON `students`.`degree_id` = `degrees`.`id`
+JOIN `degrees` ON `students`.`degree_id` = `degrees`.`id`
 WHERE `degrees`.`name` = "Corso di Laurea in Economia";
 
 
@@ -19,5 +19,15 @@ Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44)
 
 SELECT  `courses`.`id` AS `id_corso`, `courses`.`name` AS `nome_corso`
 FROM `courses`
-JOIN `cours_teacher` ON 
- 
+JOIN `course_teacher` ON `course_teacher`.`course_id` = `courses`.`id`
+WHERE `teacher_id` = "44";
+
+
+Selezionare tutti gli studenti con i dati relativi al corso di laurea a cui sono iscritti e il
+relativo dipartimento, in ordine alfabetico per cognome e nome
+
+SELECT `students`.`id` AS `id_studente`, `students`.`surname` AS `cognome_studente`, `students`.`name` AS `nome_studente`, `departments`.`name` AS `nome_dipartimento` ,`degrees`.`name` AS `nome_corso`
+FROM `students`
+JOIN `degrees` ON `degrees`.`id` = `students`.`degree_id`
+JOIN `departments` ON `departments`.`id` = `degrees`.`department_id`
+ORDER BY `students`.`surname` ASC, `students`.`name` ASC;
